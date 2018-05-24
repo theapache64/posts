@@ -1,7 +1,9 @@
 // @flow
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {addPost} from '../actions/postActions';
 
-export default class AddPostForm extends Component {
+class AddPostForm extends Component {
 
     constructor(props) {
         super(props);
@@ -24,15 +26,7 @@ export default class AddPostForm extends Component {
             body: this.state.body
         };
 
-        fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(postData)
-        })
-            .then(data => data.json())
-            .then(post => console.log(post));
+        this.props.addPost(postData);
     };
 
     onChangeInput = (e) => {
@@ -70,3 +64,9 @@ export default class AddPostForm extends Component {
     }
 
 }
+
+const mapStateToProps = state => ({
+    post: state.posts.post
+});
+
+export default connect(mapStateToProps, {addPost})(AddPostForm)
