@@ -14,6 +14,7 @@ export default function(state = initialState, action) {
             console.log('new post reducer: ');
             return {
                 ...state,
+                isClearField : true,
                 post: action.payload
             };
 
