@@ -44,6 +44,17 @@ class AddPostForm extends Component {
         })
     };
 
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isClearField) {
+            this.setState({
+                title: '',
+                body: ''
+            })
+        }
+    }
+
+
     render() {
 
         return (
@@ -77,7 +88,11 @@ class AddPostForm extends Component {
 
 const mapStateToProps = state => ({
     post: state.posts.post,
+<<<<<<< HEAD
     isClearForm : state.posts.isClearForm
+=======
+    isClearField: state.posts.isClearField
+>>>>>>> c3077cbbe37bda48c665d975f92f716b825a3c4a
 });
 
 export default connect(mapStateToProps, {addPost, clearForm})(AddPostForm)
