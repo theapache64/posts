@@ -1,5 +1,5 @@
 // @flow
-import {FETCH_POSTS, NEW_POST} from '../actions/types';
+import {CLEAR_FORM, FETCH_POSTS, NEW_POST} from '../actions/types';
 
 export const fetchPosts = () => dispatch => {
     console.log('fetching');
@@ -13,7 +13,7 @@ export const fetchPosts = () => dispatch => {
 
 export const addPost = (postData) => dispatch => {
 
-    console.log('posting new data');
+      console.log('posting new data');
 
     fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
@@ -23,10 +23,24 @@ export const addPost = (postData) => dispatch => {
         body: JSON.stringify(postData)
     })
         .then(data => data.json())
-        .then(post => dispatch({
-            type : NEW_POST,
-            payload:  post
-        }));
+        .then(post => {
+
+            dispatch({
+                type: NEW_POST,
+                payload: post
+            });
+
+        });
 
 
+};
+
+export const clearForm = () => dispatch => {
+    console.log('clearing');
+    dispatch({
+        type: CLEAR_FORM,
+        payload: {
+            isClearForm: true
+        }
+    })
 };

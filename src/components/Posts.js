@@ -2,7 +2,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 
-import {fetchPosts} from '../actions/postActions';
+import {fetchPosts,clearForm} from '../actions/postActions';
 
 class Posts extends Component {
 
@@ -12,11 +12,11 @@ class Posts extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.post){
+        if (nextProps.post) {
+            this.props.clearForm();
             this.props.posts.unshift(nextProps.post);
         }
     }
-
 
     render() {
 
@@ -40,7 +40,7 @@ class Posts extends Component {
 
 const mapStateToProps = state => ({
     posts: state.posts.posts,
-    post : state.posts.post
+    post: state.posts.post,
 });
 
-export default connect(mapStateToProps, {fetchPosts})(Posts);
+export default connect(mapStateToProps, {fetchPosts,clearForm})(Posts);

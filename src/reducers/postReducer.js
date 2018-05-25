@@ -1,5 +1,5 @@
 // @flow
-import {FETCH_POSTS, NEW_POST} from '../actions/types';
+import {CLEAR_FORM, FETCH_POSTS, NEW_POST} from '../actions/types';
 
 const initialState = {
     posts: [],
@@ -24,6 +24,12 @@ export default function(state = initialState, action) {
                 posts: action.payload
             };
 
+        case CLEAR_FORM:
+            console.log('clearing form');
+            return {
+                ...state,
+                isClearForm : action.payload.isClearForm
+            };
         default:
             return state
     }

@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addPost} from '../actions/postActions';
+import {addPost,clearForm} from '../actions/postActions';
 
 class AddPostForm extends Component {
 
@@ -17,6 +17,15 @@ class AddPostForm extends Component {
         this.onChangeInput = this.onChangeInput.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+
+        if(nextProps.isClearForm){
+            this.setState({
+                title: '',
+                body: ''
+            });
+        }
+    }
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -36,6 +45,7 @@ class AddPostForm extends Component {
     };
 
     render() {
+
         return (
             <div>
                 <h1>Add Post</h1>
@@ -66,7 +76,8 @@ class AddPostForm extends Component {
 }
 
 const mapStateToProps = state => ({
-    post: state.posts.post
+    post: state.posts.post,
+    isClearForm : state.posts.isClearForm
 });
 
-export default connect(mapStateToProps, {addPost})(AddPostForm)
+export default connect(mapStateToProps, {addPost, clearForm})(AddPostForm)
